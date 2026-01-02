@@ -1,4 +1,4 @@
-const ProductCard = ({ product: p }) => {
+const ProductCard = ({ product: p,onEditClick }) => {
   return (
     <div className="bg-white rounded-2xl border border-slate-200 hover:border-blue-400 hover:shadow-md transition-all flex flex-col">
       <div className="p-5">
@@ -47,7 +47,7 @@ const ProductCard = ({ product: p }) => {
             </p>
           </div>
 
-          <button className="p-2 rounded-xl bg-slate-50 hover:bg-blue-600 hover:text-white text-slate-400 transition-all ml-2 shadow-sm border border-slate-100">
+          <button onClick={()=>onEditClick(p)} className="p-2 rounded-xl bg-slate-50 hover:bg-blue-600 hover:text-white text-slate-400 transition-all ml-2 shadow-sm border border-slate-100">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-4 w-4"

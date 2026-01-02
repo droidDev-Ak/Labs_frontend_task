@@ -1,10 +1,8 @@
-const ProductTableRow = ({ product: p }) => {
+const ProductTableRow = ({ product: p, onEditClick }) => {
   return (
     <tr className="hover:bg-slate-50 transition-colors">
       <td className="px-4 py-3">
-        <div className="font-medium text-slate-900 text-sm">
-          {p.name}
-        </div>
+        <div className="font-medium text-slate-900 text-sm">{p.name}</div>
       </td>
 
       <td className="px-4 py-3">
@@ -37,12 +35,16 @@ const ProductTableRow = ({ product: p }) => {
         </div>
       </td>
 
-      <td className="px-4 py-3 font-medium text-slate-900">
-        ₹ {p.price}
-      </td>
+      <td className="px-4 py-3 font-medium text-slate-900">₹ {p.price}</td>
 
       <td className="px-4 py-3 text-right">
-        <button className="inline-flex items-center text-blue-600 hover:text-blue-800 text-xs font-medium px-2 py-1 hover:bg-blue-50 rounded">
+        <button
+          onClick={() => {
+            console.log(p);
+            return onEditClick(p);
+          }}
+          className="inline-flex items-center text-blue-600 hover:text-blue-800 text-xs font-medium px-2 py-1 hover:bg-blue-50 rounded"
+        >
           Edit
         </button>
       </td>

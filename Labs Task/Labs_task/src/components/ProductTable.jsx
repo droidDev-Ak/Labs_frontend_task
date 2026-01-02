@@ -1,6 +1,6 @@
 import ProductTableRow from "./ProductTableRow";
 
-const ProductTable = ({ products }) => {
+const ProductTable = ({ products,onEditClick }) => {
   return (
     <div className="bg-white rounded-lg border border-slate-200 overflow-x-auto">
       <table className="w-full text-sm">
@@ -29,7 +29,7 @@ const ProductTable = ({ products }) => {
 
         <tbody className="divide-y divide-slate-200">
           {products.map((p) => (
-            <ProductTableRow key={p.id} product={p} />
+            <ProductTableRow key={p.id} product={p} onEditClick={onEditClick} />
           ))}
         </tbody>
       </table>

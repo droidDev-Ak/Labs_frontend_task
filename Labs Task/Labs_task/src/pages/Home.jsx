@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import SearchBar from "../components/Search";
 import ProductForm from "../components/ProductForm";
@@ -8,7 +8,10 @@ import Pagination from "../components/Pagination";
 export default function App() {
   const [viewType, setViewType] = useState("table");
   const [searchTerm, setSearchTerm] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+
   const [currentPage, setCurrentPage] = useState(1);
+  const [editingProduct, setEditingProduct] = useState(null);
   const [products, setProducts] = useState([
     {
       id: 1,
@@ -510,23 +513,35 @@ export default function App() {
     },
   ]);
   const ITEMS_PER_PAGE = 6;
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setSearchQuery(searchTerm);
+    }, 500);
 
-  const totalPagess = Math.ceil(products.length / ITEMS_PER_PAGE);
+    return () => clearTimeout(timer);
+  }, [searchTerm]);
+  const [totalPage,setTotalPage] = useState(0);
 
   return (
     <div className="min-h-screen bg-[#f8fafc] p-4 md:p-8 space-y-8">
       <Header viewType={viewType} setViewType={setViewType} />
       <SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
-      <ProductForm setProducts={setProducts} products={products} />
+      <ProductForm
+        setProducts={setProducts}
+        editingProduct={editingProduct}
+        setEditingProduct={setEditingProduct}
+      />
       <ProductDisplay
         viewType={viewType}
+        setTotalPage={setTotalPage}
         products={products}
-        searchQuery={searchTerm}
+        searchQuery={searchQuery}
         currentPage={currentPage}
         ITEMS_PER_PAGE={ITEMS_PER_PAGE}
+        onEditClick={(product) => setEditingProduct(product)}
       />
       <Pagination
-        totalPages={totalPagess}
+        totalPages={totalPage}
         currentPage={currentPage}
         onPageChange={setCurrentPage}
       />
