@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const ProductForm = ({ setProducts, editingProduct, setEditingProduct }) => {
+const ProductForm = ({ setProducts, editingProduct, setEditingProduct ,onEditClick}) => {
   const fields = [
     { "Product Name": "name" },
     { "Price ($)": "price" },
@@ -19,7 +19,13 @@ const ProductForm = ({ setProducts, editingProduct, setEditingProduct }) => {
 
   const [formData, setFormData] = useState(initialState);
   const [error, setError] = useState(false);
-
+  const isFormValid =
+    formData.name.trim() !== "" &&
+    formData.category.trim() !== "" &&
+    formData.price !== "" &&
+    Number(formData.price) > 0 &&
+    formData.stock !== "" &&
+    Number(formData.stock) > 0;
 
   useEffect(() => {
     if (editingProduct) {
@@ -30,8 +36,11 @@ const ProductForm = ({ setProducts, editingProduct, setEditingProduct }) => {
   }, [editingProduct]);
 
   const handleProductAdd = () => {
-
-    if (Object.values(formData).some((val) => val === "" || val === 0)) {
+    if (
+      Object.keys(formData)
+        .filter((val) => val != "description")
+        .some((val) => val === "" || val === 0)
+    ) {
       setError("All fields are required");
       return;
     }
@@ -41,13 +50,11 @@ const ProductForm = ({ setProducts, editingProduct, setEditingProduct }) => {
     }
 
     if (editingProduct) {
-
       setProducts((prev) =>
         prev.map((p) => (p.id === editingProduct.id ? formData : p))
       );
-      setEditingProduct(null); 
+      setEditingProduct(null);
     } else {
-
       const newProduct = { ...formData, id: Date.now() };
       setProducts((prev) => [...prev, newProduct]);
     }
@@ -59,7 +66,12 @@ const ProductForm = ({ setProducts, editingProduct, setEditingProduct }) => {
   const handleDiscard = () => {
     setError(false);
     setFormData(initialState);
-    if (setEditingProduct) setEditingProduct(null);
+
+    if (setEditingProduct){
+       setEditingProduct(null);
+    onEditClick(null);
+    }
+
   };
 
   const handleChange = (name, value) => {
@@ -86,7 +98,6 @@ const ProductForm = ({ setProducts, editingProduct, setEditingProduct }) => {
         )}
       </div>
 
-      {/* ... keeping your existing grid and input mapping logic ... */}
       <div className="p-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {fields.map((field) => {
@@ -121,11 +132,15 @@ const ProductForm = ({ setProducts, editingProduct, setEditingProduct }) => {
         <div className="mt-8 flex items-center gap-4">
           <button
             onClick={handleProductAdd}
-            className={`px-8 py-3 text-white font-semibold rounded-xl shadow-lg transition-all active:scale-95 ${
-              editingProduct
-                ? "bg-emerald-600 hover:bg-emerald-700 shadow-emerald-100"
-                : "bg-blue-600 hover:bg-blue-700 shadow-blue-200"
-            }`}
+            disabled={!isFormValid}
+            className={`px-8 py-3 text-white font-semibold rounded-xl shadow-lg transition-all active:scale-95
+    ${
+      !isFormValid
+        ? "bg-slate-300 text-slate-400 cursor-not-allowed shadow-none active:scale-100"
+        : editingProduct
+        ? "bg-emerald-600 hover:bg-emerald-700 shadow-emerald-100"
+        : "bg-blue-600 hover:bg-blue-700 shadow-blue-200"
+    }`}
           >
             {editingProduct ? "Update Product" : "Save Product"}
           </button>
@@ -140,4 +155,4 @@ const ProductForm = ({ setProducts, editingProduct, setEditingProduct }) => {
     </section>
   );
 };
-export default ProductForm
+export default ProductForm;

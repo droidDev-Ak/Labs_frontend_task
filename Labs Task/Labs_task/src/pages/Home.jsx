@@ -520,7 +520,7 @@ export default function App() {
 
     return () => clearTimeout(timer);
   }, [searchTerm]);
-  const [totalPage,setTotalPage] = useState(0);
+  const [totalPage, setTotalPage] = useState(0);
 
   return (
     <div className="min-h-screen bg-[#f8fafc] p-4 md:p-8 space-y-8">
@@ -530,15 +530,20 @@ export default function App() {
         setProducts={setProducts}
         editingProduct={editingProduct}
         setEditingProduct={setEditingProduct}
+        onEditClick={(product) => setEditingProduct(product)}
       />
       <ProductDisplay
         viewType={viewType}
         setTotalPage={setTotalPage}
         products={products}
+        editingProduct={editingProduct}
+
         searchQuery={searchQuery}
         currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
         ITEMS_PER_PAGE={ITEMS_PER_PAGE}
         onEditClick={(product) => setEditingProduct(product)}
+
       />
       <Pagination
         totalPages={totalPage}

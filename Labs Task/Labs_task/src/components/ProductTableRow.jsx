@@ -1,6 +1,16 @@
-const ProductTableRow = ({ product: p, onEditClick }) => {
+
+
+const ProductTableRow = ({ product: p, onEditClick,editingProduct }) => {
+const isEditing = editingProduct?.id === p.id;
+ 
   return (
-    <tr className="hover:bg-slate-50 transition-colors">
+    <tr
+      className={`transition-all duration-200 border-l-4 ${
+        isEditing
+          ? "bg-blue-100 border-l-blue-600 shadow-sm"
+          : "hover:bg-slate-50 border-l-transparent"
+      }`}
+    >
       <td className="px-4 py-3">
         <div className="font-medium text-slate-900 text-sm">{p.name}</div>
       </td>
@@ -39,13 +49,13 @@ const ProductTableRow = ({ product: p, onEditClick }) => {
 
       <td className="px-4 py-3 text-right">
         <button
-          onClick={() => {
-            console.log(p);
-            return onEditClick(p);
-          }}
-          className="inline-flex items-center text-blue-600 hover:text-blue-800 text-xs font-medium px-2 py-1 hover:bg-blue-50 rounded"
-        >
-          Edit
+         onClick={() => onEditClick(isEditing ? null : p)}
+          className={`inline-flex items-center text-xs font-bold px-3 py-1.5 rounded-lg transition-all ${
+            isEditing
+              ? "bg-blue-600 text-white shadow-md"
+              : "text-blue-600 hover:bg-blue-50 hover:text-blue-800"
+          }`}>
+          {isEditing? "Close" : "Edit"}
         </button>
       </td>
     </tr>
