@@ -23,7 +23,11 @@ const ProductForm = ({ setProducts }) => {
         return field == "" || field == 0;
       })
     ) {
-      setError(true);
+      setError("All fields are required");
+      return;
+    }
+    if (formData.name.length >= 20) {
+      setError("Name Should be less than 20 characters");
       return;
     }
     setProducts((prev) => [...prev, formData]);
@@ -83,9 +87,7 @@ const ProductForm = ({ setProducts }) => {
                 clipRule="evenodd"
               />
             </svg>
-            <span className="text-sm font-semibold text-red-700">
-              All fields are required
-            </span>
+            <span className="text-sm font-semibold text-red-700">{error}</span>
           </div>
         )}
         <div className="mt-8 flex items-center gap-4">
