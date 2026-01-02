@@ -1,4 +1,5 @@
 const Header = ({ viewType, setViewType }) => (
+  
   <header className="flex flex-col md:flex-row md:items-center justify-between gap-6 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
     <div>
       <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
