@@ -67,15 +67,16 @@ export default function App() {
       description: "Flexible neck desk lamp with 3 color modes.",
     },
   ]);
+  const totalPagess=Math.ceil(products.length/5);
   
   return (
     <div className="min-h-screen bg-[#f8fafc] p-4 md:p-8 space-y-8">
       <Header viewType={viewType} setViewType={setViewType} />
       <SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
       <ProductForm setProducts={setProducts} products={products} />
-      <ProductDisplay viewType={viewType} products={products} searchQuery={searchTerm} />
+      <ProductDisplay viewType={viewType} products={products} searchQuery={searchTerm} currentPage={currentPage}/>
       <Pagination
-        totalPages={}
+        totalPages={totalPagess}
         currentPage={currentPage}
         onPageChange={setCurrentPage}
       />

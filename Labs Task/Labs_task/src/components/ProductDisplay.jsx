@@ -1,15 +1,19 @@
 import { useMemo } from "react";
 
-const ProductDisplay = ({ viewType, products, searchQuery }) => {
-  const filteredProduct = useMemo(() => {
-    return products.filter((obj) => {
-      console.log(obj.name);
-      const matchesFilter = searchQuery == "";
-      if (matchesFilter) return products;
-      return obj.name.toLowerCase().includes(searchQuery.toLowerCase());
-    });
-  }, [searchQuery]);
+const ProductDisplay = ({ viewType, products, searchQuery, currentPage }) => {
+  const filteredProducts = useMemo(() => {
+    if (!searchQuery) return products;
 
+    return products.filter((obj) =>
+      obj.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }, [products, searchQuery]);
+
+  const paginatedProduct = useMemo(() => {
+    const startIndex = (currentPage - 1) * 5;
+    const endIndex = startIndex + 5;
+    return filteredProducts.slice(startIndex, endIndex);
+  }, [currentPage, filteredProducts]);
   if (!products || products.length === 0) {
     return (
       <div className="flex items-center justify-center p-8 bg-white rounded-lg border border-dashed border-slate-200">
@@ -48,7 +52,7 @@ const ProductDisplay = ({ viewType, products, searchQuery }) => {
           </thead>
 
           <tbody className="divide-y divide-slate-200">
-            {filteredProduct.map((p) => (
+            {paginatedProduct.map((p) => (
               <tr key={p.id} className="hover:bg-slate-50 transition-colors">
                 <td className="px-4 py-3 align-middle min-w-37.5">
                   <div className="font-medium text-slate-900 text-sm">

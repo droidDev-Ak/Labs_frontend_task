@@ -1,6 +1,6 @@
 const Pagination = ({ totalPages, currentPage, onPageChange }) => (
   <nav className="flex items-center justify-center gap-2 pb-12">
-    <button className="p-2 border border-slate-200 rounded-xl hover:bg-slate-100 disabled:opacity-30">
+    <button onClick={()=> onPageChange(currentPage-1)} className="p-2 border border-slate-200 rounded-xl hover:bg-slate-100 disabled:opacity-30">
       Prev
     </button>
     <div className="flex gap-2">
@@ -18,7 +18,7 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => (
         </button>
       ))}
     </div>
-    <button className="p-2 border border-slate-200 rounded-xl hover:bg-slate-100">
+    <button onClick={()=> onPageChange(currentPage+1)} className="p-2 border border-slate-200 rounded-xl hover:bg-slate-100">
       Next
     </button>
   </nav>
