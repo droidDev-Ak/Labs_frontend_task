@@ -99,7 +99,7 @@ const ProductDisplay = ({ viewType, products }) => {
       {products.map((p) => (
         <div
           key={p.id}
-          className="bg-white rounded-lg border border-slate-200 hover:border-slate-300 transition-all max-w-60 mx-auto w-full"
+          className="bg-white rounded-lg border border-slate-200 hover:border-slate-300 transition-all max-w-60  w-full"
         >
           <div className="p-3">
             <div className="flex items-start justify-between mb-2">

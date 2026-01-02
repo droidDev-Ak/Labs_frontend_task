@@ -24,6 +24,27 @@ export default function App() {
       stock: 12,
       description: "This is torch ",
     },
+    {
+      name: "Torch",
+      price: 1000,
+      category: "Utility",
+      stock: 12,
+      description: "This is torch ",
+    },
+    {
+      name: "Torch",
+      price: 1000,
+      category: "Utility",
+      stock: 12,
+      description: "This is torch ",
+    },
+    {
+      name: "Torch",
+      price: 1000,
+      category: "Utility",
+      stock: 12,
+      description: "This is torch ",
+    },
   ]);
 
   return (

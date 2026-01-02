@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const ProductForm = ({ products, setProducts }) => {
+const ProductForm = ({ setProducts }) => {
   const fields = [
     { "Product Name": "name" },
     { "Price ($)": "price" },
@@ -8,26 +8,35 @@ const ProductForm = ({ products, setProducts }) => {
     { "Stock Level": "stock" },
     { Description: "description" },
   ];
-  const initalState = {
+  const initialState = {
     name: "",
     description: "",
     stock: 0,
     category: "",
     price: 0,
   };
-  const [formData, setFormData] = useState(initalState);
-
+  const [formData, setFormData] = useState(initialState);
+  const [error, setError] = useState(false);
   const handleProductAdd = () => {
+    if (
+      Object.values(formData).some((field) => {
+        return field == "" || field == 0;
+      })
+    ) {
+      setError(true);
+      return;
+    }
     setProducts((prev) => [...prev, formData]);
-    console.log(products);
+    setFormData(initialState);
   };
 
   const handleDiscard = () => {
-    setFormData(initalState);
+    setError(false);
+    setFormData(initialState);
   };
   const handleChange = (name, value) => {
+    setError(false);
     setFormData((prev) => ({ ...prev, [name]: value }));
-    console.log(formData);
   };
 
   return (
@@ -40,7 +49,7 @@ const ProductForm = ({ products, setProducts }) => {
           {fields.map((field) => {
             const keyName = Object.keys(field)[0];
             const values = Object.values(field)[0];
-            console.log(values);
+
             return (
               <div key={keyName} className="space-y-2">
                 <label className="text-xs font-bold text-slate-500 uppercase ml-1">
@@ -52,7 +61,7 @@ const ProductForm = ({ products, setProducts }) => {
                       ? "number"
                       : "text"
                   }
-                  value={formData.values}
+                  value={formData[values]}
                   onChange={(e) => handleChange(values, e.target.value)}
                   placeholder={`Enter ${keyName}`}
                   className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all"
@@ -61,7 +70,24 @@ const ProductForm = ({ products, setProducts }) => {
             );
           })}
         </div>
-
+        {error && (
+          <div className="flex items-center gap-2 p-3 mt-4 bg-red-50 border-l-4 border-red-500 rounded-md">
+            <svg
+              className="w-5 h-5 text-red-500"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fillRule="evenodd"
+                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                clipRule="evenodd"
+              />
+            </svg>
+            <span className="text-sm font-semibold text-red-700">
+              All fields are required
+            </span>
+          </div>
+        )}
         <div className="mt-8 flex items-center gap-4">
           <button
             onClick={handleProductAdd}
