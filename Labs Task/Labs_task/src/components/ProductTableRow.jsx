@@ -1,8 +1,6 @@
+const ProductTableRow = ({ product: p, onEditClick, editingProduct }) => {
+  const isEditing = editingProduct?.id === p.id;
 
-
-const ProductTableRow = ({ product: p, onEditClick,editingProduct }) => {
-const isEditing = editingProduct?.id === p.id;
- 
   return (
     <tr
       className={`transition-all duration-200 border-l-4 ${
@@ -49,13 +47,14 @@ const isEditing = editingProduct?.id === p.id;
 
       <td className="px-4 py-3 text-right">
         <button
-         onClick={() => onEditClick(isEditing ? null : p)}
+          onClick={() => onEditClick(isEditing ? null : p)}
           className={`inline-flex items-center text-xs font-bold px-3 py-1.5 rounded-lg transition-all ${
             isEditing
               ? "bg-blue-600 text-white shadow-md"
               : "text-blue-600 hover:bg-blue-50 hover:text-blue-800"
-          }`}>
-          {isEditing? "Close" : "Edit"}
+          }`}
+        >
+          {isEditing ? "Close" : "Edit"}
         </button>
       </td>
     </tr>

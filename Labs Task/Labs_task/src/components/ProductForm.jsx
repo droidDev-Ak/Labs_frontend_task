@@ -25,7 +25,7 @@ const ProductForm = ({ setProducts, editingProduct, setEditingProduct ,onEditCli
     formData.price !== "" &&
     Number(formData.price) > 0 &&
     formData.stock !== "" &&
-    Number(formData.stock) > 0;
+    Number(formData.stock) >= 0;
 
   useEffect(() => {
     if (editingProduct) {

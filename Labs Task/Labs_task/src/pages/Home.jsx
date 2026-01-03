@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Header from "../components/Header";
 import SearchBar from "../components/Search";
 import ProductForm from "../components/ProductForm";
@@ -253,266 +253,21 @@ export default function App() {
       stock: 12,
       description: "Multi-port USB charging station.",
     },
-    {
-      id: 31,
-      name: "Ultra Torch 31",
-      price: 1450,
-      category: "Utility",
-      stock: 8,
-      description: "Searchlight with long range.",
-    },
-    {
-      id: 32,
-      name: "Pro Mouse 32",
-      price: 750,
-      category: "Electronics",
-      stock: 33,
-      description: "Wired gaming mouse with RGB.",
-    },
-    {
-      id: 33,
-      name: "Max Bottle 33",
-      price: 1200,
-      category: "Lifestyle",
-      stock: 10,
-      description: "Smart bottle with hydration reminders.",
-    },
-    {
-      id: 34,
-      name: "Lite Keyboard 34",
-      price: 1500,
-      category: "Electronics",
-      stock: 27,
-      description: "Folding Bluetooth keyboard.",
-    },
-    {
-      id: 35,
-      name: "Classic Mat 35",
-      price: 2500,
-      category: "Fitness",
-      stock: 6,
-      description: "Extra wide professional mat.",
-    },
-    {
-      id: 36,
-      name: "Ultra Headset 36",
-      price: 4800,
-      category: "Electronics",
-      stock: 2,
-      description: "Wireless hi-fi headphones.",
-    },
-    {
-      id: 37,
-      name: "Pro Lamp 37",
-      price: 2200,
-      category: "Decor",
-      stock: 11,
-      description: "Smart LED strip lights.",
-    },
-    {
-      id: 38,
-      name: "Max Watch 38",
-      price: 6000,
-      category: "Electronics",
-      stock: 5,
-      description: "Hybrid luxury smartwatch.",
-    },
-    {
-      id: 39,
-      name: "Lite Speaker 39",
-      price: 900,
-      category: "Electronics",
-      stock: 48,
-      description: "Compact mini speaker.",
-    },
-    {
-      id: 40,
-      name: "Classic Charger 40",
-      price: 300,
-      category: "Utility",
-      stock: 100,
-      description: "Standard micro-USB cable.",
-    },
-    {
-      id: 41,
-      name: "Ultra Torch 41",
-      price: 1750,
-      category: "Utility",
-      stock: 14,
-      description: "Rechargeable work light.",
-    },
-    {
-      id: 42,
-      name: "Pro Mouse 42",
-      price: 1350,
-      category: "Electronics",
-      stock: 9,
-      description: "High-precision trackball mouse.",
-    },
-    {
-      id: 43,
-      name: "Max Bottle 43",
-      price: 950,
-      category: "Lifestyle",
-      stock: 17,
-      description: "Infuser bottle for fruit water.",
-    },
-    {
-      id: 44,
-      name: "Lite Keyboard 44",
-      price: 3800,
-      category: "Electronics",
-      stock: 3,
-      description: "Hot-swappable mechanical board.",
-    },
-    {
-      id: 45,
-      name: "Classic Mat 45",
-      price: 1250,
-      category: "Fitness",
-      stock: 22,
-      description: "Alignment-marked yoga mat.",
-    },
-    {
-      id: 46,
-      name: "Ultra Headset 46",
-      price: 1200,
-      category: "Electronics",
-      stock: 30,
-      description: "In-ear wired earbuds.",
-    },
-    {
-      id: 47,
-      name: "Pro Lamp 47",
-      price: 3100,
-      category: "Decor",
-      stock: 4,
-      description: "Vintage Edison bulb lamp.",
-    },
-    {
-      id: 48,
-      name: "Max Watch 48",
-      price: 2500,
-      category: "Electronics",
-      stock: 16,
-      description: "Kid-friendly smartwatch.",
-    },
-    {
-      id: 49,
-      name: "Lite Speaker 49",
-      price: 3200,
-      category: "Electronics",
-      stock: 8,
-      description: "Bookshelf speakers (Pair).",
-    },
-    {
-      id: 50,
-      name: "Classic Charger 50",
-      price: 1200,
-      category: "Utility",
-      stock: 20,
-      description: "Wireless charging pad.",
-    },
-    {
-      id: 51,
-      name: "Ultra Torch 51",
-      price: 1900,
-      category: "Utility",
-      stock: 6,
-      description: "Solar powered lantern.",
-    },
-    {
-      id: 52,
-      name: "Pro Mouse 52",
-      price: 650,
-      category: "Electronics",
-      stock: 41,
-      description: "Basic 3-button office mouse.",
-    },
-    {
-      id: 53,
-      name: "Max Bottle 53",
-      price: 850,
-      category: "Lifestyle",
-      stock: 0,
-      description: "Collapsible silicone bottle.",
-    },
-    {
-      id: 54,
-      name: "Lite Keyboard 54",
-      price: 1900,
-      category: "Electronics",
-      stock: 14,
-      description: "Splash-proof office keyboard.",
-    },
-    {
-      id: 55,
-      name: "Classic Mat 55",
-      price: 3000,
-      category: "Fitness",
-      stock: 2,
-      description: "Memory foam exercise mat.",
-    },
-    {
-      id: 56,
-      name: "Ultra Headset 56",
-      price: 6500,
-      category: "Electronics",
-      stock: 10,
-      description: "Active noise cancelling pro headphones.",
-    },
-    {
-      id: 57,
-      name: "Pro Lamp 57",
-      price: 1800,
-      category: "Decor",
-      stock: 15,
-      description: "Sunset projection lamp.",
-    },
-    {
-      id: 58,
-      name: "Max Watch 58",
-      price: 4200,
-      category: "Electronics",
-      stock: 7,
-      description: "Rugged outdoor sports watch.",
-    },
-    {
-      id: 59,
-      name: "Lite Speaker 59",
-      price: 4500,
-      category: "Electronics",
-      stock: 3,
-      description: "Large party speaker with light show.",
-    },
-    {
-      id: 60,
-      name: "Classic Charger 60",
-      price: 950,
-      category: "Utility",
-      stock: 25,
-      description: "Car charger with dual ports.",
-    },
-    {
-      id: 61,
-      name: "Ultra Torch 61",
-      price: 1550,
-      category: "Utility",
-      stock: 18,
-      description:
-        "Multi-functional magnetic work light with 360-degree rotation.",
-    },
-    {
-      id: 62,
-      name: "Pro Mouse 62",
-      price: 2100,
-      category: "Electronics",
-      stock: 2,
-      description:
-        "High-performance gaming mouse with adjustable DPI and weights.",
-    },
   ]);
+
   const ITEMS_PER_PAGE = 6;
+  const handleEditToggle = (product) => {
+    setEditingProduct((prev) => (prev?.id === product?.id ? null : product));
+  };
+  const filteredProducts = useMemo(() => {
+    if (!searchQuery) return products;
+    return products.filter((p) =>
+      p.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }, [products, searchQuery]);
+
+  const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setSearchQuery(searchTerm);
@@ -520,7 +275,6 @@ export default function App() {
 
     return () => clearTimeout(timer);
   }, [searchTerm]);
-  const [totalPage, setTotalPage] = useState(0);
 
   return (
     <div className="min-h-screen bg-[#f8fafc] p-4 md:p-8 space-y-8">
@@ -534,19 +288,16 @@ export default function App() {
       />
       <ProductDisplay
         viewType={viewType}
-        setTotalPage={setTotalPage}
-        products={products}
-        editingProduct={editingProduct}
-
+        products={filteredProducts}
         searchQuery={searchQuery}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
         ITEMS_PER_PAGE={ITEMS_PER_PAGE}
-        onEditClick={(product) => setEditingProduct(product)}
-
+        editingProduct={editingProduct}
+        onEditClick={handleEditToggle}
       />
       <Pagination
-        totalPages={totalPage}
+        totalPages={totalPages}
         currentPage={currentPage}
         onPageChange={setCurrentPage}
       />
